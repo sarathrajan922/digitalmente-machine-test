@@ -5,16 +5,17 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
-
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import Users from './collections/Users'
+import Posts from './collections/Posts'
 
 export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
   },
-  editor: slateEditor({}),
-  collections: [Users],
+  editor:  lexicalEditor({}),
+  collections: [Users,Posts],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -26,3 +27,6 @@ export default buildConfig({
     url: process.env.DATABASE_URI,
   }),
 })
+
+
+
